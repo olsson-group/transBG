@@ -10,8 +10,8 @@ def construct_z_matrix(X, ref_atoms, placing_order):
 
     - X (torch.tensor, size: (n_atoms, 3) ): Cartesian coordinates of the atoms.
 
-    - ref_atoms (list, size: (n_atoms, 3) ): Reference atoms for internal coordinates generation. The distance will be computed with respect the last atom of this list,
-                                             the angle with respect to the two lasts and the torsion with respect the three. 
+    - ref_atoms (list, size: (n_atoms, 3) ): Reference atoms for internal coordinates generation. The distance will be computed with respect the first atom of this list,
+                                             the angle with respect to the two first and the torsion with respect the three. 
 
       - placing_order (list, size: (n_atoms) ): placing order of the atoms.
 
