@@ -84,8 +84,11 @@ def deconstruct_z_matrix(z_matrix, ref_atoms, loss=True):
 
     cartesian = torch.zeros( (n_atoms, 3), dtype = torch.float32, device = z_matrix.device)
     cartesian[1] = z_matrix[0].clone()
-    angle = torch.tensor( 1-ref_atoms[1][0], dtype= torch.int16 ) * torch.pi - z_matrix[1,1]
-    cartesian[2,0] = cartesian[ ref_atoms[1][0] , 0] + z_matrix[1,0] * torch.cos(angle)
+    if ref_atoms[2][0]:
+        angle = z_matrix[1,1]
+    else:
+        angle = torch.pi - z_matrix[1,1]
+    cartesian[2,0] = cartesian[ ref_atoms[2][0] , 0] + z_matrix[1,0] * torch.cos(angle)
     cartesian[2,1] = z_matrix[1,0] * torch.sin(angle)
 
     for i_atom in range(3, n_atoms):
